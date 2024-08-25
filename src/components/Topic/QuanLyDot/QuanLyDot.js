@@ -15,15 +15,10 @@ import { SearchBoxQLDot } from "./SearchBoxQLDot";
 import { AddDot } from "./AddDot/AddDot";
 import { requestDELETE } from "../../../utils/requestDETELE";
 import { requestPost } from "../../../utils/requestPOST";
+import Pagination from "../../layout/paniga/Pagination";
 
 export const QuanLyDot = () => {
-  const [modalType, setModalType] = useState();
-  const [visibleAddChoice, setVisibleAddChoice] = useState(false);
-  const [visibleAddManager, setVisibleAddManager] = useState(false);
-  const [visibleAddTeacher, setVisibleAddTeacher] = useState(false);
-  const [visibleAddStudent, setVisibleAddStudent] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
-  const [visibleDetail, setVisibleDetail] = useState(false);
   const [idUser, setIdUser] = useState();
   const [data, setData] = useState([]);
   const [dataShow, setDataShow] = useState([]);
@@ -33,7 +28,6 @@ export const QuanLyDot = () => {
   const [size, setSize] = useState(10);
   const [totalPage, setTotalPage] = useState(0);
   const [render, setRender] = useState(0);
-  const [courseId, setCourseId] = useState("");
   const [visible, setVisible] = useState(false);
 
   const [visibleAdd, setVisibleAdd] = useState(false);
@@ -89,7 +83,6 @@ export const QuanLyDot = () => {
   const handleClose = () => {
     setVisible(false);
     setVisibleEdit(false);
-    setVisibleDetail(false);
     setVisibleAdd(false);
     setDataEdit();
     setCreateBatch({
@@ -227,7 +220,6 @@ export const QuanLyDot = () => {
                     <div
                       key={item.id}
                       onClick={() => {
-                        setVisibleDetail(true);
                         setIdUser(item.id);
                         handleDeleteDot(item.id);
                       }}
@@ -256,6 +248,13 @@ export const QuanLyDot = () => {
           ))}
         </tbody>
       </table>
+      <Pagination
+        currentPage={page}
+        pageSize={size}
+        totalRow={data.length}
+        onPageChange={setPage}
+        onSizeChange={setSize}
+      />
       {visibleAdd && (
         <AddDot
           createBatch={createBatch}

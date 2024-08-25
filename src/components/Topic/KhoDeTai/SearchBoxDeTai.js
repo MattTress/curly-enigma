@@ -45,9 +45,9 @@ const SearchBoxDeTai = (props) => {
           type="text"
           name=""
           id=""
-          value={search.full_name}
+          value={""}
           onChange={(e) => {
-            setSearch({ ...search, full_name: e.target.value });
+            setSearch();
           }}
         />
       </td>
@@ -57,9 +57,9 @@ const SearchBoxDeTai = (props) => {
           type="text"
           name=""
           id=""
-          value={search.phone}
+          value={""}
           onChange={(e) => {
-            setSearch({ ...search, phone: e.target.value });
+            setSearch();
           }}
         />
       </td>
@@ -84,7 +84,7 @@ const SearchBoxDeTai = (props) => {
               <li
                 className="h-[32px] hover:bg-[#E2E3E9]  "
                 onClick={() => {
-                  setSearch({ ...search, gender: 1 });
+                  setSearch();
                   setIsOpenClose(false);
                 }}
               >
@@ -119,9 +119,9 @@ const SearchBoxDeTai = (props) => {
           type="text"
           name=""
           id=""
-          value={search.address}
+          value={""}
           onChange={(e) => {
-            setSearch({ ...search, address: e.target.value });
+            setSearch();
           }}
         />
       </td>

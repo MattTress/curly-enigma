@@ -10,6 +10,7 @@ import icon_delflter from "./assets/icon_delfilter.svg";
 import icon_lenxuong from "./assets/icon_lenxuong.svg";
 import icon_stt from "./assets/icon_stt.svg";
 import request from "../../utils/request";
+import Pagination from "../../components/layout/paniga/Pagination";
 
 const Field = () => {
   const [data, setData] = useState([]);
@@ -303,7 +304,13 @@ const Field = () => {
           </div>
         </div>
       )}
-
+      <Pagination
+        currentPage={page}
+        pageSize={size}
+        totalRow={data.length}
+        onPageChange={setPage}
+        onSizeChange={setSize}
+      />
       {visibleAdd && (
         <div className="fixed top-0 left-0 w-full h-full z-10 bg-opacity-40	text-center  bg-black flex justify-center items-center ">
           <div

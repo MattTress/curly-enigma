@@ -43,6 +43,7 @@ function Login() {
     }
     doLogin({ username, password }).then((res) => {
       const responseData = res.data;
+
       localStorage.setItem("token", responseData.token);
       // <Navigate to ={"/home"}/>
       window.location.href = "/home";

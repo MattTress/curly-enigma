@@ -12,7 +12,7 @@ const headers = {
 if (token) {
   headers["Authorization"] = `Bearer ${token}`;
 }
-export const requestPut = axios.create({
+export const requestPut =   axios.create({
   method: "PUT",
   baseURL: config.BASE_URL,
   headers: headers,

@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getMyUser } from "../services/user.service";
 
-
 export const UserContext = createContext();
 
 const GetDataUser = () => {
@@ -18,6 +17,8 @@ const GetDataUser = () => {
           window.location.href = "/login";
         }
         console.log(res.data);
+        console.log(res.data.type);
+
         setCurrentUser(res.data);
         setIsLoading(false);
       })

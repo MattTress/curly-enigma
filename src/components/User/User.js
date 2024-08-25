@@ -21,6 +21,7 @@ import { SearchBox } from "./SearchBox";
 import { AddChoice } from "./AddUser/AddChoice";
 import { DetailUser } from "./DetailUser.js/DetailUser";
 import { requestPost } from "../../utils/requestPOST";
+import Pagination from "../layout/paniga/Pagination";
 
 const User = () => {
   const [modalType, setModalType] = useState();
@@ -39,7 +40,6 @@ const User = () => {
   const [size, setSize] = useState(10);
   const [totalPage, setTotalPage] = useState(0);
   const [render, setRender] = useState(0);
-  const [courseId, setCourseId] = useState("");
   const [visible, setVisible] = useState(false);
 
   const [visibleAdd, setVisibleAdd] = useState(false);
@@ -162,7 +162,7 @@ const User = () => {
         password: createUser.password,
         phone: createUser.phone,
         teacherType: createUser.teacherType,
-        type: "ADMIN",
+        type: createUser.type,
         username: createUser.username,
         classId: createUser.classId,
         courseId: createUser.courseId,
@@ -336,11 +336,17 @@ const User = () => {
               <td className="border-x-0 border-[#eee] text-center p-3">
                 {item.birthday}
               </td>
-              {/* <td>{item.type}</td> */}
             </tr>
           ))}
         </tbody>
       </table>
+      <Pagination
+        currentPage={page}
+        pageSize={size}
+        totalRow={data.length}
+        onPageChange={setPage}
+        onSizeChange={setSize}
+      />
       {visibleEdit && (
         <EditQuanLy
           handleClose={handleClose}
@@ -373,6 +379,8 @@ const User = () => {
           setVisibleAddStudent={setVisibleAddStudent}
           icon_gv={icon_gv}
           icon_sv={icon_sv}
+          createUser = {createUser}
+          setCreateUser  ={setCreateUser}
         ></AddChoice>
       )}
 

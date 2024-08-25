@@ -10,6 +10,8 @@ export const AddChoice = (props) => {
     setVisibleAddStudent,
     icon_gv,
     icon_sv,
+    createUser,
+    setCreateUser,
   } = props;
 
   return (
@@ -41,6 +43,7 @@ export const AddChoice = (props) => {
                 id="quanly"
                 onClick={() => {
                   setModalType(1);
+                  setCreateUser("ADMIN");
                 }}
               />
 
@@ -54,6 +57,7 @@ export const AddChoice = (props) => {
                 id="giangvien"
                 onClick={() => {
                   setModalType(2);
+                  setCreateUser("TEACHER");
                 }}
               />
 
@@ -68,6 +72,7 @@ export const AddChoice = (props) => {
                 id="sinhvien"
                 onClick={() => {
                   setModalType(3);
+                  setCreateUser("STUDENT");
                 }}
               />
 

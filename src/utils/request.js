@@ -12,7 +12,7 @@ const headers = {
 if (token) {
   headers["Authorization"] = `Bearer ${token}`;
 }
-const request = axios.create({
+const request =  axios.create({
   baseURL: config.BASE_URL,
   headers: headers,
 });

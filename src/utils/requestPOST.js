@@ -11,8 +11,8 @@ const headers = {
 
 if (token) {
   headers["Authorization"] = `Bearer ${token}`;
-} 
-export const requestPost = axios.create({
+}
+export const requestPost =  axios.create({
   method: "POST",
   baseURL: config.BASE_URL,
   headers: headers,
@@ -32,4 +32,3 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-

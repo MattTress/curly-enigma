@@ -19,9 +19,13 @@ code {
 .dropDown .child {
   display: none;
   position: absolute;
-  
 }
 
 .dropDown:hover .child {
   display: block;
+}
+
+.ck {
+  width: 750px;
+  height: 149px;
 }

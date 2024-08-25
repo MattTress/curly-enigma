@@ -2,7 +2,7 @@ import icon_acc from "./assets/icon_acc.svg";
 import icon_camera from "./assets/icon_camera.svg";
 
 export const FooterAdd = (props) => {
-  const { handleClose, handleCreateUser, blueBtn, post } = props;
+  const { handleClose, handleCreateNhom, blueBtn, post } = props;
   return (
     <footer className="h-[60px]">
       <div className="flex flex-row h-full  gap-3 justify-end items-center pr-3 ">

@@ -5,11 +5,11 @@ import icon_noti from "./asset/icon_noti.svg";
 import icon_acc from "./asset/icon_acc.svg";
 import icon_logout from "./asset/icon_logout.svg";
 import { UserContext } from "../../../contexts/UserContext";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 function Header(props) {
+  const { isOpenCloseQL, setIsOpenCloseQL } = props;
   const [check, setCheck] = useState(false);
   const handleClickAcc = () => {
-    console.log("da an");
     setCheck(!check);
   };
   const { currentUser } = useContext(UserContext);
@@ -40,9 +40,16 @@ function Header(props) {
                 <div className="flex flex-col pt-3  justify-center items-center gap-4 ">
                   <img src={icon_acc} width={70} alt="" />
                   <span>{currentUser.fullName}</span>
-                  <button className="min-w-[136px] min-h-[36px] border rounded-[3px] mb-4  p-2">
-                    Quản lý tài khoản
-                  </button>
+                  <Link to={"/quanlytaikhoan"}>
+                    <button
+                      className="min-w-[136px] min-h-[36px] border rounded-[3px] mb-4  p-2"
+                      onClick={(e) => {
+                        setIsOpenCloseQL(true);
+                      }}
+                    >
+                      Quản lý tài khoản
+                    </button>
+                  </Link>
                 </div>
                 <div
                   onClick={() => {

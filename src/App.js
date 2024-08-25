@@ -13,10 +13,17 @@ import Class from "./pages/Class/Class";
 import User from "./components/User/User";
 import { QuanLyDot } from "./components/Topic/QuanLyDot/QuanLyDot";
 import { KhoDeTai } from "./components/Topic/KhoDeTai/KhoDeTai";
+import { useState } from "react";
+import { QuanLyTaiKhoan } from "./components/QuanLyTaiKhoan/QuanLyTaiKhoan";
+import { ThongTinCaNhan } from "./components/QuanLyTaiKhoan/ThongTinCaNhan";
+import { DoiMatKhau } from "./components/QuanLyTaiKhoan/DoiMatKhau";
+import { NhomDoAn } from "./components/QuanLyNhomSV_GV/NhomDoAn";
+import { QuanLySV } from "./components/QuanLyNhomSV/QuanLySV";
 
 function App() {
   const RenderPage = () => {
     const token = localStorage.getItem("token");
+    const [isOpenCloseQL, setIsOpenCloseQL] = useState(false);
     return (
       <>
         <div>
@@ -24,17 +31,18 @@ function App() {
             <UserProvider>
               <div className="flex  h-screen overflow-hidden">
                 {/* Sidebar */}
-                <SideBar />
+                <SideBar
+                  isOpenCloseQL={isOpenCloseQL}
+                  setIsOpenCloseQL={setIsOpenCloseQL}
+                />
                 {/* Content */}
                 <div className="md:w-full h-full overflow-y-auto">
                   {/* header */}
-                  <Header />
-                  {/* <div className={`min-h-[46px] w-full shadow-lg`}>
-                    <span className="p-3 font-semibold text-[#172B4D]">
-                      Tổ chức
-                    </span>
-                  </div> */}
-                  {/* component */}
+                  <Header
+                    isOpenCloseQL={isOpenCloseQL}
+                    setIsOpenCloseQL={setIsOpenCloseQL}
+                  />
+
                   <WebRoute />
                 </div>
               </div>
@@ -50,7 +58,10 @@ function App() {
     return (
       <Routes>
         <Route path="/home" element={<PrivateRoute></PrivateRoute>} />
-
+        <Route path="/quanlynhomdoan" element={<NhomDoAn />} />
+        <Route path="sinhvien" element={<QuanLySV />} />
+        <Route path="/thongtincanhan" element={<ThongTinCaNhan />} />
+        <Route path="/doimatkhau" element={<DoiMatKhau />} />
         <Route path="/login" element={<Login />} />
         <Route path="/tochuc" element={<ToChuc />} />
         <Route path="/field" element={<Field />} />
