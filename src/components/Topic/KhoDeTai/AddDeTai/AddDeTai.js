@@ -1,5 +1,7 @@
 import icon_plus from "../assets/icon_plus.svg";
-
+import icon_tick from "../assets/icon_tick.svg";
+import icon_xx from "../assets/icon_xx.svg";
+import icon_bin from "../assets/icon_bin.svg";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import {
   ClassicEditor,
@@ -15,11 +17,47 @@ import {
 } from "ckeditor5";
 
 import "ckeditor5/ckeditor5.css";
+import { useEffect, useState } from "react";
+import request from "../../../../utils/request";
+import { requestPost } from "../../../../utils/requestPOST";
+import { render } from "@testing-library/react";
 
 export const AddDeTai = (props) => {
-  const { handleClose, post, createDeTai, setCreateDeTai } = props;
-  
+  const { handleClose, post, createDeTai, setCreateDeTai, render } = props;
 
+  const [topicGoal, setTopicGoal] = useState({
+    content: "",
+    id: "",
+    topicId: "",
+  });
+  const [topicGoalShow, setTopicGoalShow] = useState([]);
+  // useEffect(()=>{
+  //   request()
+  // })
+  const postGoal = () => {
+    requestPost("/api/goal-of-topic", {
+      params: {
+        topic_id: 1,
+        content: topicGoal.content,
+      },
+    })
+      .then((res) => {
+        setTopicGoal("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    request("/api/goal-of-topic")
+      .then((res) => {
+        const responsdata = res.data;
+        setTopicGoalShow(responsdata);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [render]);
   return (
     <div className="fixed top-0 left-0 w-full h-full z-10 bg-opacity-40	text-center  bg-black flex justify-center items-center ">
       <div
@@ -118,31 +156,19 @@ export const AddDeTai = (props) => {
                   initialData: "",
                 }}
               />
-
-              {/* <input
-                
-                type="text"
-                placeholder="Nhập tên đợt"
-                className="w-[750px] h-[149px] p-3 border border-[#E2E3E9] rounded"
-                value={createDeTai.content}
-                onChange={(e) => {
-                  setCreateDeTai({
-                    ...createDeTai,
-                    content: e.target.value,
-                  });
-                }}
-              /> 
-              */}
             </label>
             <label
               htmlFor="tieuChi"
               className="flex flex-col items-start gap-1"
             >
               <h2 className="font-medium text-sm ">Tiêu chí</h2>
-              <div className="w-[750px] h-[202px] p-3 border border-[#E2E3E9] rounded">
+              <div className="w-[750px] h-[202px] p-3 border border-[#E2E3E9] relative  rounded">
                 <button
                   type="button"
                   className="flex flex-row gap-1 items-center pb-3"
+                  onClick={(e) => {
+                    postGoal();
+                  }}
                 >
                   <img src={icon_plus} alt="" />
                   <span className="text-[#1890FF] font-medium">
@@ -154,11 +180,32 @@ export const AddDeTai = (props) => {
                   type="text"
                   placeholder="Nhập tiêu chí"
                   className="w-[718px] h-[40px] p-3 border border-[#E2E3E9] rounded"
-                  value={createDeTai.content}
+                  value={topicGoal.content}
                   onChange={(e) => {
-                    setCreateDeTai({ ...createDeTai, content: e.target.value });
+                    setTopicGoal({ ...topicGoal, content: e.target.value });
                   }}
                 />
+                {topicGoalShow.map((item, index) => {
+                  return (
+                    <div className="w-[718px] h-[40px] p-3 border text-[#172B4D] relative left-[3px]  border-[#E2E3E9] rounded">
+                      {item.content}
+                      <div className="relative">
+                        <img
+                          src={icon_tick}
+                          className="absolute top-[-35px] right-[2.25rem]"
+                          alt=""
+                          srcset=""
+                        />
+                        <img
+                          src={icon_xx}
+                          className="absolute top-[-35px] right-[-0.25rem]"
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </label>
           </div>

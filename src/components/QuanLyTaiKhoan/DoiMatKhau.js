@@ -24,7 +24,7 @@ export const DoiMatKhau = (props) => {
           </h3>
         </div>
         <div
-          className={` h-full mx-6 my-4  bg-[#F9F9F9] absolute  relative  w-full`}
+          className={` h-full mx-6 my-4  bg-[#F9F9F9]   relative  w-full`}
         >
           <form className={`relative w-full `}>
             <div className={`absolute top-[10rem] left-[8rem] border-b pb-12`}>

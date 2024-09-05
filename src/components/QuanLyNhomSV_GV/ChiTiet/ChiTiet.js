@@ -1,7 +1,10 @@
 import icon_stt from "../assets/icon_stt.svg";
 import icon_lenxuong from "../assets/icon_lenxuong.svg";
 import icon_cloud from "../assets/icon_cloud.svg";
+import { useState } from "react";
+import { ThemChungNhan } from "./ThemChungNhan";
 export const ChiTiet = (props) => {
+  const [addCN, setAddCN] = useState(false);
   return (
     <div>
       <div className="border-b shadow flex justify-between px-10 py-2 items-center">
@@ -10,13 +13,28 @@ export const ChiTiet = (props) => {
         </div>
       </div>
 
-      <div className="mt-4 p-6">
+      <div className="mt-4 p-6 relative">
         <div className="pl-6 pb-6 flex flex-col gap-2 ">
           <p>Đợt 1 4/8/2022 - 20/12/2022</p>
           <p>Nhóm 1</p>
           <p>Đề tài xây dựng web A</p>
         </div>
-        <table className="w-full ">
+        <button
+          type="button"
+          className="w-[145px] p-1 text-[#1890FF] font-medium absolute top-[1.5rem]  right-[10rem]  border border-[#1890FF] rounded-[3px]"
+          onClick={() => {
+            setAddCN(true);
+          }}
+        >
+          Thêm chứng nhận
+        </button>
+        <button
+          type="button"
+          className="w-[57px] p-1 text-[#1890FF] font-medium absolute  top-[1.5rem]  right-[6rem]  border border-[#1890FF] rounded-[3px]"
+        >
+          Sửa
+        </button>
+        <table className="w-full  h-[275px] ">
           <thead className={` border border-[#eee] relative `}>
             <tr>
               <td className={`text-center w-[40px] font-medium `}>STT</td>
@@ -105,7 +123,7 @@ export const ChiTiet = (props) => {
                 {"Trần Văn A"}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3">
-                {"Trường nhóm"}
+                {""}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3 w-[278px]">
                 <div className="relative ">
@@ -139,7 +157,7 @@ export const ChiTiet = (props) => {
                 {"Trần Văn A"}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3">
-                {"Trường nhóm"}
+                {""}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3 w-[278px]">
                 <div className="relative ">
@@ -173,7 +191,7 @@ export const ChiTiet = (props) => {
                 {"Trần Văn A"}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3">
-                {"Trường nhóm"}
+                {""}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3 w-[278px]">
                 <div className="relative ">
@@ -206,6 +224,7 @@ export const ChiTiet = (props) => {
           </div>
         </div>
       </div>
+      {addCN && <ThemChungNhan addCN={addCN} setAddCN={setAddCN} />}
     </div>
   );
 };

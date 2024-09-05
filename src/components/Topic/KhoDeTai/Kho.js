@@ -281,6 +281,7 @@ export const Kho = (props) => {
           createDeTai={createDeTai}
           setCreateDeTai={setCreateDeTai}
           handleData = {handleData}
+          render ={render}
         />
       )}
     </div>

@@ -18,7 +18,6 @@ import { AddNhom } from "./AddNhom/AddNhom";
 import { ChiTiet } from "./ChiTiet/ChiTiet";
 
 export const NhomDoAn = () => {
-
   const [visibleDetail, setVisibleDetail] = useState(false);
   const [idUser, setIdUser] = useState();
   const [data, setData] = useState([]);
@@ -61,28 +60,30 @@ export const NhomDoAn = () => {
     handleData();
   }, [data, page, size]);
 
+  const handleClose = () => {
+    setVisibleAdd(false);
+  };
+  useEffect(() => {
+    ///api/student-group
+
+    request("/api/project-group")
+      .then((res) => {
+        let responseData = res.data;
+        responseData = responseData.sort(function (a, b) {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setData(...data, responseData);
+        handleData();
+      })
+      .catch((err) => {});
+  }, [render]);
+
   const handleData = () => {
     const calTotalPage = Math.ceil(data.length / size);
     setTotalPage(calTotalPage);
     const dataPagination = data.slice((page - 1) * size, page * size);
     setDataShow(dataPagination);
   };
-
-  const handleClose = () => {
-    setVisibleAdd(false);
-  };
-  useEffect(() => {
-    request("/api/student-group")
-      .then((res) => {
-        let responseData = res.data;
-        responseData = responseData.sort(function (a, b) {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setData(responseData);
-        handleData();
-      })
-      .catch((err) => {});
-  }, [render]);
   const post = () => {
     requestPost("/api/student-group", {
       data: {},
@@ -206,7 +207,6 @@ export const NhomDoAn = () => {
                           Sửa
                         </div>
                         <div
-                          key={item.id}
                           onClick={() => {
                             setVisibleDetail(true);
                             setIdUser(item.id);
