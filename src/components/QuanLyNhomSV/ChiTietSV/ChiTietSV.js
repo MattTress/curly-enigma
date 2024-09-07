@@ -3,7 +3,9 @@ import icon_lenxuong from "../assets/icon_lenxuong.svg";
 import icon_cloud from "../assets/icon_cloud.svg";
 import { CongViec } from "../AddCongViec/CongViec";
 import { useState } from "react";
+import { ChungNhan } from "../ChungNhan/ChungNhan";
 export const ChiTietSV = (props) => {
+  const [showChungNhan, setShowChungNhan] = useState(false);
   const [visibleAddCongViec, setAddCongViec] = useState(false);
   return (
     <div>
@@ -23,6 +25,9 @@ export const ChiTietSV = (props) => {
           <button
             type="button"
             className="absolute border border-[#1890FF] rounded-[5px] mb-4  text-[#1890FF] top-0 right-1 "
+            onClick={(e) => {
+              setShowChungNhan(true);
+            }}
           >
             <h3 className="p-1">Chứng nhận</h3>
           </button>
@@ -231,6 +236,12 @@ export const ChiTietSV = (props) => {
         <CongViec
           visibleAddCongViec={visibleAddCongViec}
           setAddCongViec={setAddCongViec}
+        />
+      )}
+      {showChungNhan && (
+        <ChungNhan
+          showChungNhan={showChungNhan}
+          setShowChungNhan={setShowChungNhan}
         />
       )}
     </div>

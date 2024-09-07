@@ -29,3 +29,24 @@ code {
   width: 750px;
   height: 149px;
 }
+
+.monteFont {
+  font-family: "MonteCarlo";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 85px;
+  /* identical to box height */
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  /* aaa */
+  background: linear-gradient(90deg, #f9edbc 0%, #bf8d34 45.77%, #e0b14e 100%);
+
+  background-clip: text;
+}
+/* NGUyễn Văn An */
+.montecarlo-regular {
+  font-family: "MonteCarlo";
+
+}
