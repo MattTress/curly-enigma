@@ -16,6 +16,8 @@ export const AddTeacher = (props) => {
     setData,
     render,
     post,
+    typee,
+    setTypee,
   } = props;
 
   return (
@@ -46,8 +48,10 @@ export const AddTeacher = (props) => {
           {/* footer  */}
           <FooterAdd
             handleClose={handleClose}
-            post={post}
             blueBtn="Thêm"
+            post={post}
+            typee={typee}
+            setTypee={setTypee}
           ></FooterAdd>
         </div>
       </div>

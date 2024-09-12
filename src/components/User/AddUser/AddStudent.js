@@ -8,8 +8,16 @@ import icon_acc from "./assets/icon_acc.svg";
 import icon_camera from "./assets/icon_camera.svg";
 
 export const AddStudent = (props) => {
-  const { handleClose, createUser, setCreateUser, handleData, render, post } =
-    props;
+  const {
+    handleClose,
+    createUser,
+    setCreateUser,
+    handleData,
+    render,
+    post,
+    typee,
+    setTypee,
+  } = props;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-10 bg-opacity-40	text-center  bg-black flex justify-center items-center ">
@@ -44,7 +52,9 @@ export const AddStudent = (props) => {
           <FooterAdd
             handleClose={handleClose}
             blueBtn="Thêm"
-            post={post}
+            post = {post}
+            typee={typee}
+            setTypee={setTypee}
           ></FooterAdd>
         </div>
       </div>

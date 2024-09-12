@@ -22,6 +22,9 @@ import { AddChoice } from "./AddUser/AddChoice";
 import { DetailUser } from "./DetailUser.js/DetailUser";
 import { requestPost } from "../../utils/requestPOST";
 import Pagination from "../layout/paniga/Pagination";
+import { requestPut } from "../../utils/requestPUT";
+import { EditGiangVien } from "./Edit/EditGiangVien";
+import { EditStudent } from "./Edit/EditSinhVien";
 
 const User = () => {
   const [modalType, setModalType] = useState();
@@ -29,6 +32,9 @@ const User = () => {
   const [visibleAddManager, setVisibleAddManager] = useState(false);
   const [visibleAddTeacher, setVisibleAddTeacher] = useState(false);
   const [visibleAddStudent, setVisibleAddStudent] = useState(false);
+  const [visibleEditManager, setVisibleEditManager] = useState(false);
+  const [visibleEditTeacher, setVisibleEditTeacher] = useState(false);
+  const [visibleEditStudent, setVisibleEditStudent] = useState(false);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [visibleDetail, setVisibleDetail] = useState(false);
   const [idUser, setIdUser] = useState();
@@ -41,9 +47,28 @@ const User = () => {
   const [totalPage, setTotalPage] = useState(0);
   const [render, setRender] = useState(0);
   const [visible, setVisible] = useState(false);
-
+  const [typee, setTypee] = useState("");
   const [visibleAdd, setVisibleAdd] = useState(false);
   const [createUser, setCreateUser] = useState({
+    address: "",
+    avatar: "string",
+    birthday: "",
+    classId: 0,
+    courseId: 0,
+    email: "",
+    enabled: true,
+    fieldId: 0,
+    fullName: "",
+    gender: 0,
+    note: "",
+    password: "",
+    phone: "",
+    studentCode: "string",
+    teacherType: true,
+    type: "",
+    username: "",
+  });
+  const [updateUser, setUpdateUser] = useState({
     address: "",
     avatar: "string",
     birthday: "",
@@ -84,7 +109,7 @@ const User = () => {
       birthday_end: search.birthday_end,
       type: search.type,
       page_index: page - 1,
-      page_size: size,
+      page_size: 10000,
     };
     request("/api/admin/user", {
       params,
@@ -110,7 +135,7 @@ const User = () => {
         birthday_end: search.birthday_end,
         type: "",
         page_index: page - 1,
-        page_size: size,
+        page_size: 10000,
       },
     }).then((res) => {
       let responseData = res.data;
@@ -145,10 +170,32 @@ const User = () => {
     setVisibleAddManager(false);
     setVisibleAddTeacher(false);
     setVisibleAddStudent(false);
+    setVisibleEditManager(false);
+    setVisibleEditTeacher(false);
+    setVisibleEditStudent(false);
     setIdUser("");
     setDataEdit();
+    setCreateUser({
+      address: "",
+      avatar: "string",
+      birthday: "",
+      classId: 0,
+      courseId: 0,
+      email: "",
+      enabled: true,
+      fieldId: 0,
+      fullName: "",
+      gender: 0,
+      note: "",
+      password: "",
+      phone: "",
+      studentCode: "string",
+      teacherType: true,
+      type: "",
+      username: "",
+    });
   };
-  const post = () => {
+  const post = (typee) => {
     requestPost("/api/admin/user", {
       data: {
         address: createUser.address,
@@ -162,7 +209,7 @@ const User = () => {
         password: createUser.password,
         phone: createUser.phone,
         teacherType: createUser.teacherType,
-        type: createUser.type,
+        type: typee,
         username: createUser.username,
         classId: createUser.classId,
         courseId: createUser.courseId,
@@ -179,7 +226,37 @@ const User = () => {
         console.log(err);
       });
   };
-
+  const edit = (id) => {
+    requestPut(`/api/admin/user/${id}`, {
+      data: {
+        address: updateUser.address,
+        avatar: updateUser.avatar,
+        birthday: updateUser.birthday,
+        email: updateUser.email,
+        enabled: updateUser.enabled,
+        fullName: updateUser.fullName,
+        gender: updateUser.gender,
+        note: updateUser.note,
+        password: updateUser.password,
+        phone: updateUser.phone,
+        teacherType: updateUser.teacherType,
+        username: updateUser.username,
+        classId: updateUser.classId,
+        courseId: updateUser.courseId,
+        fieldId: updateUser.fieldId,
+        studentCode: updateUser.studentCode,
+      },
+    })
+      .then((res) => {
+        let responseData = res.data;
+        handleClose();
+        setRender(Date.now());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
   return (
     <div className={` w-full h-full p-5 `}>
       <div className="border-b shadow flex justify-between px-10 py-2 items-center">
@@ -298,7 +375,13 @@ const User = () => {
                   >
                     <div
                       onClick={() => {
-                        setVisibleEdit(true);
+                        if (item.type === "ADMIN") {
+                          setVisibleEditManager(true);
+                        } else if (item.type === "TEACHER") {
+                          setVisibleEditTeacher(true);
+                        } else if (item.type === "STUDENT") {
+                          setVisibleEditStudent(true);
+                        }
                         setIdUser(item.id);
                       }}
                       className="p-2 bg-white cursor-pointer hover:bg-gray-100 w-20"
@@ -347,14 +430,7 @@ const User = () => {
         onPageChange={setPage}
         onSizeChange={setSize}
       />
-      {visibleEdit && (
-        <EditQuanLy
-          handleClose={handleClose}
-          visibleEdit={visibleEdit}
-          createUser={createUser}
-          setCreateUser={setCreateUser}
-        />
-      )}
+      
       {visibleDetail && (
         <DetailUser
           icon_X={icon_X}
@@ -379,8 +455,10 @@ const User = () => {
           setVisibleAddStudent={setVisibleAddStudent}
           icon_gv={icon_gv}
           icon_sv={icon_sv}
-          createUser = {createUser}
-          setCreateUser  ={setCreateUser}
+          createUser={createUser}
+          setCreateUser={setCreateUser}
+          typee={typee}
+          setTypee={setTypee}
         ></AddChoice>
       )}
 
@@ -393,8 +471,24 @@ const User = () => {
           setCreateUser={setCreateUser}
           render={render}
           post={post}
+          typee={typee}
+          setTypee={setTypee}
           // handleCreateUser={handleCreateUser}
         ></AddManager>
+      )}
+      {visibleEditManager && (
+        <EditQuanLy
+          setData={setData}
+          handleClose={handleClose}
+          updateUser = {updateUser}
+          setUpdateUser = {setUpdateUser}
+          render={render}
+          edit={edit}
+          typee={typee}
+          setTypee={setTypee}
+          idUser={idUser}
+          // handleCreateUser={handleCreateUser}
+        ></EditQuanLy>
       )}
       {/* visible teacher add */}
       {visibleAddTeacher && (
@@ -404,9 +498,23 @@ const User = () => {
           setCreateUser={setCreateUser}
           render={render}
           post={post}
-
+          typee={typee}
+          setTypee={setTypee}
           // handleCreateUser={handleCreateUser}
         ></AddTeacher>
+      )}
+      {visibleEditTeacher && (
+        <EditGiangVien
+          handleClose={handleClose}
+          updateUser = {updateUser}
+          setUpdateUser = {setUpdateUser}
+          render={render}
+          edit={edit}
+          typee={typee}
+          setTypee={setTypee}
+          idUser={idUser}
+          // handleCreateUser={handleCreateUser}
+        ></EditGiangVien>
       )}
       {/* visible student add */}
       {visibleAddStudent && (
@@ -416,9 +524,23 @@ const User = () => {
           setCreateUser={setCreateUser}
           render={render}
           post={post}
-
+          typee={typee}
+          setTypee={setTypee}
           // handleCreateUser={handleCreateUser}
         ></AddStudent>
+      )}
+      {visibleEditStudent && (
+        <EditStudent
+          handleClose={handleClose}
+          updateUser = {updateUser}
+          setUpdateUser = {setUpdateUser}
+          render={render}
+          edit={edit}
+          typee={typee}
+          idUser={idUser}
+          setTypee={setTypee}
+          // handleCreateUser={handleCreateUser}
+        ></EditStudent>
       )}
     </div>
   );

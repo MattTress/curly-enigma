@@ -1,8 +1,8 @@
 import icon_acc from "./assets/icon_acc.svg";
 import icon_camera from "./assets/icon_camera.svg";
 
-export const FooterAdd = (props) => {
-  const { handleClose, handleCreateNhom, blueBtn, post, typee,
+export const FooterEdit = (props) => {
+  const { handleClose, handleCreateNhom, blueBtn, edit, idUser,
     setTypee, } = props;
   return (
     <footer className="h-[60px]">
@@ -20,7 +20,7 @@ export const FooterAdd = (props) => {
           type="button"
           className="border-[#E2E3E9] text-[#FFFFFF] font-normal w-[83px] h-[32px]  bg-[#1890FF] border rounded-[3px]"
           onClick={() => {
-            post(typee);
+            edit(idUser);
             handleClose()
           }}
         >

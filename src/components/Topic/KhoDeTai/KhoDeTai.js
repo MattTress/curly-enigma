@@ -109,7 +109,35 @@ export const KhoDeTai = () => {
           dataShow={dataShow}
         />
       )}
-      {isThongKe && <ThongKe />}
+      {isThongKe && (
+        <ThongKe
+          today={today}
+          setRender={setRender}
+          data={data}
+          setVisibleAdd={setVisibleAdd}
+          isStorage={isStorage}
+          setIsStorage={setIsStorage}
+          isTopicOfYear={isTopicOfYear}
+          setIsTopicOfYear={setIsTopicOfYear}
+          isThongKe={isThongKe}
+          setIsThongKe={setIsThongKe}
+          search={search}
+          setSearch={setSearch}
+          page={page}
+          size={size}
+          setData={setData}
+          render={render}
+          dataShow={dataShow}
+          totalRow={data.length}
+          setPage={setPage}
+          setSize={setSize}
+          setTotalPage={setTotalPage}
+          setDataShow={setDataShow}
+          createDeTai={createDeTai}
+          setCreateDeTai={setCreateDeTai}
+          visibleAdd={visibleAdd}
+        />
+      )}
     </>
   );
 };

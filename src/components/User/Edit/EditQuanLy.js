@@ -1,15 +1,18 @@
 // import { logDOM } from "@testing-library/react";
 
 import { useEffect, useState } from "react";
-import { FooterAdd } from "../AddUser/FooterAdd";
+
 import icon_X from "../assets/icon_X.svg";
 import icon_acc from "../assets/icon_acc.svg";
 import icon_camera from "../assets/icon_camera.svg";
 import { BodyEdit } from "./BodyEdit";
 import request from "../../../utils/request";
+import { BodyAdd } from "../AddUser/BodyAdd";
+import { FooterAdd } from "../AddUser/FooterAdd";
+import { FooterEdit } from "./FooterEdit";
 
 const EditQuanLy = (props) => {
-  const { createUser, idUser, setCreateUser, handleClose } = props;
+  const { idUser, handleClose, edit, updateUser, setUpdateUser } = props;
   // debugger
 
   return (
@@ -19,19 +22,36 @@ const EditQuanLy = (props) => {
         <div
           className="absolute mx-auto  z-20 w-[50%] top-[10rem]  bg-white "
           title="Thêm thành viên"
-          handleClose={() => handleClose}
         >
           <div className="w-full h-[833px]">
             {/* Header */}
             <header className="flex flex-row justify-between h-[60px] shadow-md ">
               <h2 className="p-4  font-medium ">Sửa quản lý</h2>
-              <img className="p-4" src={icon_X} alt="" />
+              <img
+                className="p-4"
+                onClick={() => {
+                  handleClose();
+                }}
+                src={icon_X}
+                alt=""
+              />
             </header>
             {/* body  */}
-            <BodyEdit idUser={idUser}></BodyEdit>
+
+            <BodyEdit
+              idUser={idUser}
+              updateUser={updateUser}
+              setUpdateUser={setUpdateUser}
+            />
 
             {/* footer  */}
-            <FooterAdd handleClose={handleClose}></FooterAdd>
+
+            <FooterEdit
+              handleClose={handleClose}
+              blueBtn="Sửa"
+              edit={edit}
+              idUser={idUser}
+            ></FooterEdit>
           </div>
         </div>
       </div>

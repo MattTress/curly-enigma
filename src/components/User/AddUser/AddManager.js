@@ -15,6 +15,8 @@ export const AddManager = (props) => {
     render,
     setData,
     post,
+    typee ,
+    setTypee ,
   } = props;
 
   
@@ -48,9 +50,10 @@ export const AddManager = (props) => {
           
           <FooterAdd
             handleClose={handleClose}
-            // handleCreateUser={handleCreateUser}
             blueBtn="Thêm"
-            post={post}
+            post = {post}
+            typee={typee}
+            setTypee={setTypee}
           ></FooterAdd>
         </div>
       </div>
