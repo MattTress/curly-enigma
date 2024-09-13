@@ -12,7 +12,15 @@ import { FooterAdd } from "../AddUser/FooterAdd";
 import { FooterEdit } from "./FooterEdit";
 
 const EditQuanLy = (props) => {
-  const { idUser, handleClose, edit, updateUser, setUpdateUser } = props;
+  const {
+    idUser,
+    handleClose,
+    edit,
+    updateUser,
+    setUpdateUser,
+    dataDetailEdit,
+    setDataDetailEdit,
+  } = props;
   // debugger
 
   return (

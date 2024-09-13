@@ -10,7 +10,8 @@ import { FooterEdit } from "./FooterEdit";
 import { BodyEdit } from "./BodyEdit";
 
 export const EditStudent = (props) => {
-  const { idUser, handleClose, edit, updateUser, setUpdateUser} = props;
+  const { idUser, handleClose, edit, updateUser, setUpdateUser,dataDetailEdit,
+    setDataDetailEdit, } = props;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-10 bg-opacity-40	text-center  bg-black flex justify-center items-center ">
@@ -38,8 +39,8 @@ export const EditStudent = (props) => {
           {/* body  */}
           <BodyEdit
             idUser={idUser}
-            updateUser = {updateUser}
-          setUpdateUser = {setUpdateUser}
+            updateUser={updateUser}
+            setUpdateUser={setUpdateUser}
           />
 
           {/* footer  */}

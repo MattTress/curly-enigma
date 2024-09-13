@@ -25,7 +25,18 @@ export const SearchBox = (props) => {
         <button
           type="button"
           className=" border w-[32px] h-[32px] flex justify-center items-center  border-[#E2E3E9]"
-          onClick={() => {}}
+          onClick={() => {
+            setSearch({
+              address: "",
+              full_name: "",
+              email: "",
+              gender: "",
+              phone: "",
+              birthday_start: "",
+              birthday_end: "",
+              type: "",
+            });
+          }}
         >
           <img src={icon_delflter} alt="" />
         </button>

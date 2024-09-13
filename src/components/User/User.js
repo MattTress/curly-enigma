@@ -64,7 +64,7 @@ const User = () => {
     password: "",
     phone: "",
     studentCode: "string",
-    teacherType: true,
+    teacherType: false,
     type: "",
     username: "",
   });
@@ -83,7 +83,7 @@ const User = () => {
     password: "",
     phone: "",
     studentCode: "string",
-    teacherType: true,
+    teacherType: false,
     type: "",
     username: "",
   });
@@ -98,6 +98,40 @@ const User = () => {
     type: "",
   });
 
+  const [dataDetailEdit, setDataDetailEdit] = useState({
+    address: "",
+    avatar: "string",
+    birthday: "",
+    classId: 0,
+    courseId: 0,
+    email: "",
+    enabled: true,
+    fieldId: 0,
+    fullName: "",
+    gender: 0,
+    note: "",
+    password: "",
+    phone: "",
+    studentCode: "string",
+    teacherType: false,
+    type: "",
+    username: "",
+  });
+
+  const get = (idUser) => {
+    request(`/api/admin/user/${idUser}`)
+      .then((res) => {
+        let responseData = res.data;
+        console.log(responseData);
+        setUpdateUser(responseData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // useEffect(() => {
+  //   get()
+  // }, []);
   const handleSubmit = () => {
     const params = {
       address: search.address,
@@ -190,7 +224,7 @@ const User = () => {
       password: "",
       phone: "",
       studentCode: "string",
-      teacherType: true,
+      teacherType: false,
       type: "",
       username: "",
     });
@@ -228,7 +262,7 @@ const User = () => {
   };
   const edit = (id) => {
     requestPut(`/api/admin/user/${id}`, {
-      data: {
+      params: {
         address: updateUser.address,
         avatar: updateUser.avatar,
         birthday: updateUser.birthday,
@@ -256,7 +290,7 @@ const User = () => {
         console.log(err);
       });
   };
-  
+
   return (
     <div className={` w-full h-full p-5 `}>
       <div className="border-b shadow flex justify-between px-10 py-2 items-center">
@@ -383,6 +417,8 @@ const User = () => {
                           setVisibleEditStudent(true);
                         }
                         setIdUser(item.id);
+
+                        get(item.id);
                       }}
                       className="p-2 bg-white cursor-pointer hover:bg-gray-100 w-20"
                     >
@@ -404,7 +440,7 @@ const User = () => {
               <td className="border-x-0 border-[#eee] text-center p-3">
                 {item.fullName}
               </td>
-              <td className="border-x-0 border-[#eee] text-center p-3">
+              <td className="border-x-0 border-[#eee] text-left p-3">
                 {item.phone}
               </td>
               <td className="border-x-0 border-[#eee] text-center p-3">
@@ -430,7 +466,7 @@ const User = () => {
         onPageChange={setPage}
         onSizeChange={setSize}
       />
-      
+
       {visibleDetail && (
         <DetailUser
           icon_X={icon_X}
@@ -480,13 +516,15 @@ const User = () => {
         <EditQuanLy
           setData={setData}
           handleClose={handleClose}
-          updateUser = {updateUser}
-          setUpdateUser = {setUpdateUser}
+          updateUser={updateUser}
+          setUpdateUser={setUpdateUser}
           render={render}
           edit={edit}
           typee={typee}
           setTypee={setTypee}
           idUser={idUser}
+          dataDetailEdit={dataDetailEdit}
+          setDataDetailEdit={setDataDetailEdit}
           // handleCreateUser={handleCreateUser}
         ></EditQuanLy>
       )}
@@ -506,13 +544,15 @@ const User = () => {
       {visibleEditTeacher && (
         <EditGiangVien
           handleClose={handleClose}
-          updateUser = {updateUser}
-          setUpdateUser = {setUpdateUser}
+          updateUser={updateUser}
+          setUpdateUser={setUpdateUser}
           render={render}
           edit={edit}
           typee={typee}
           setTypee={setTypee}
           idUser={idUser}
+          dataDetailEdit={dataDetailEdit}
+          setDataDetailEdit={setDataDetailEdit}
           // handleCreateUser={handleCreateUser}
         ></EditGiangVien>
       )}
@@ -526,19 +566,22 @@ const User = () => {
           post={post}
           typee={typee}
           setTypee={setTypee}
+
           // handleCreateUser={handleCreateUser}
         ></AddStudent>
       )}
       {visibleEditStudent && (
         <EditStudent
           handleClose={handleClose}
-          updateUser = {updateUser}
-          setUpdateUser = {setUpdateUser}
+          updateUser={updateUser}
+          setUpdateUser={setUpdateUser}
           render={render}
           edit={edit}
           typee={typee}
           idUser={idUser}
           setTypee={setTypee}
+          dataDetailEdit={dataDetailEdit}
+          setDataDetailEdit={setDataDetailEdit}
           // handleCreateUser={handleCreateUser}
         ></EditStudent>
       )}

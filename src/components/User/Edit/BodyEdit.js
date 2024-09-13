@@ -6,41 +6,41 @@ import { render } from "@testing-library/react";
 
 export const BodyEdit = (props) => {
   const { idUser, updateUser, setUpdateUser } = props;
-  const [dataDetailEdit, setDataDetailEdit] = useState({
-    address: "",
-    avatar: "string",
-    birthday: "",
-    classId: 0,
-    courseId: 0,
-    email: "",
-    enabled: true,
-    fieldId: 0,
-    fullName: "",
-    gender: 0,
-    note: "",
-    password: "",
-    phone: "",
-    studentCode: "string",
-    teacherType: true,
-    type: "",
-    username: "",
-  });
-  useEffect(() => {
-    request(`/api/admin/user/${idUser}`)
-      .then((res) => {
-        let responseData = res.data;
-        console.log(responseData);
-        setDataDetailEdit(responseData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // const [dataDetailEdit, setDataDetailEdit] = useState({
+  //   address: "",
+  //   avatar: "string",
+  //   birthday: "",
+  //   classId: 0,
+  //   courseId: 0,
+  //   email: "",
+  //   enabled: true,
+  //   fieldId: 0,
+  //   fullName: "",
+  //   gender: 0,
+  //   note: "",
+  //   password: "",
+  //   phone: "",
+  //   studentCode: "string",
+  //   teacherType: false,
+  //   type: "",
+  //   username: "",
+  // });
+  // useEffect(() => {
+  //   request(`/api/admin/user/${idUser}`)
+  //     .then((res) => {
+  //       let responseData = res.data;
+  //       console.log(responseData);
+  //       setDataDetailEdit(responseData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
   return (
     <div className="  w-full items-center h-[85.5%] relative shadow-md ">
       {/* {dataDetailEdit?.map((item, index) => {
         return ( */}
-      <div key={dataDetailEdit.id}>
+      <div key={updateUser.id}>
         <div className={`relative top-8 left-[3rem] w-fit `}>
           <img src={icon_acc} width={"120px"} alt="" />
         </div>
@@ -59,12 +59,12 @@ export const BodyEdit = (props) => {
               type="text"
               id="taikhoan"
               placeholder="Nhập tài khoản"
-              value={dataDetailEdit.username}
+              value={updateUser.username}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  username: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   username: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, username: e.target.value });
               }}
             />
@@ -81,10 +81,10 @@ export const BodyEdit = (props) => {
                 id="nam"
                 value={0}
                 onClick={(e) => {
-                  setDataDetailEdit({
-                    ...dataDetailEdit,
-                    gender: e.target.value,
-                  });
+                  // setupdateUser({
+                  //   ...updateUser,
+                  //   gender: e.target.value,
+                  // });
                   setUpdateUser({ ...updateUser, gender: e.target.value });
                 }}
               />
@@ -97,10 +97,10 @@ export const BodyEdit = (props) => {
                 id="nu"
                 value={1}
                 onClick={(e) => {
-                  setDataDetailEdit({
-                    ...dataDetailEdit,
-                    gender: e.target.value,
-                  });
+                  // setupdateUser({
+                  //   ...updateUser,
+                  //   gender: e.target.value,
+                  // });
                   setUpdateUser({ ...updateUser, gender: e.target.value });
                 }}
               />
@@ -113,10 +113,10 @@ export const BodyEdit = (props) => {
                 id="khac"
                 value={2}
                 onClick={(e) => {
-                  setDataDetailEdit({
-                    ...dataDetailEdit,
-                    gender: e.target.value,
-                  });
+                  // setupdateUser({
+                  //   ...updateUser,
+                  //   gender: e.target.value,
+                  // });
                   setUpdateUser({ ...updateUser, gender: e.target.value });
                 }}
               />
@@ -135,12 +135,12 @@ export const BodyEdit = (props) => {
               name=""
               id="tel"
               placeholder="Nhập số điện thoại"
-              value={dataDetailEdit.phone}
+              value={updateUser.phone}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  phone: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   phone: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, phone: e.target.value });
               }}
             />
@@ -155,12 +155,12 @@ export const BodyEdit = (props) => {
               type="text"
               id="fullname"
               placeholder="Nhập họ và tên"
-              value={dataDetailEdit.fullName}
+              value={updateUser.fullName}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  fullName: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   fullName: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, fullName: e.target.value });
               }}
             />
@@ -173,12 +173,12 @@ export const BodyEdit = (props) => {
               type="date"
               id="date"
               placeholder="Chọn ngày"
-              value={dataDetailEdit.birthday}
+              value={updateUser.birthday}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  birthday: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   birthday: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, birthday: e.target.value });
               }}
             />
@@ -191,12 +191,12 @@ export const BodyEdit = (props) => {
               type="email"
               id="Email"
               placeholder="Nhập email"
-              value={dataDetailEdit.email}
+              value={updateUser.email}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  email: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   email: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, email: e.target.value });
               }}
             />
@@ -214,12 +214,12 @@ export const BodyEdit = (props) => {
               name=""
               id="address"
               placeholder="Nhập địa chỉ"
-              value={dataDetailEdit.address}
+              value={updateUser.address}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  address: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   address: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, address: e.target.value });
               }}
             />
@@ -248,12 +248,12 @@ export const BodyEdit = (props) => {
               name=""
               id="notes"
               placeholder="Nhập ghi chú"
-              value={dataDetailEdit.note}
+              value={updateUser.note}
               onChange={(e) => {
-                setDataDetailEdit({
-                  ...dataDetailEdit,
-                  note: e.target.value,
-                });
+                // setupdateUser({
+                //   ...updateUser,
+                //   note: e.target.value,
+                // });
                 setUpdateUser({ ...updateUser, note: e.target.value });
               }}
             />

@@ -20,8 +20,9 @@ export const FooterEdit = (props) => {
           type="button"
           className="border-[#E2E3E9] text-[#FFFFFF] font-normal w-[83px] h-[32px]  bg-[#1890FF] border rounded-[3px]"
           onClick={() => {
+            
             edit(idUser);
-            handleClose()
+            // handleClose()
           }}
         >
           {blueBtn}
